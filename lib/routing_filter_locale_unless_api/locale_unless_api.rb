@@ -36,7 +36,7 @@ module RoutingFilter
 
     class << self
       def api_format?(format)
-        format && @@api_formats.include?(format.downcase)
+        format && @@api_formats.include?(format.to_s.downcase)
       end
       
       def locales

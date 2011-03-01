@@ -89,6 +89,10 @@ class LocaleUnlessApiTest < Test::Unit::TestCase
     RoutingFilter::LocaleUnlessApi.api_formats = %w( xml json xls )
     assert_equal '/products/1.xls', routes.generate(params.merge(:format => 'xls'))
   end
+  
+  test 'should work with format as symbol' do
+    assert_equal '/products/1.xml', routes.generate(params.merge(:format => :xml))
+  end
 
 
   test 'prepends the segments /:locale to the generated path if the given locale is not the default locale' do
