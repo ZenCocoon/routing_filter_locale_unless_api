@@ -4,7 +4,7 @@ require "routing_filter_locale_unless_api/version"
 
 Gem::Specification.new do |s|
   s.name        = "routing_filter_locale_unless_api"
-  s.version     = RoutingFilter::LocaleUnlessApi::VERSION
+  s.version     = RoutingFilterLocaleUnlessApi::VERSION
   s.platform    = Gem::Platform::RUBY
   s.authors     = ["Sébastien Grosjean"]
   s.email       = ["public@zencocoon.com"]
