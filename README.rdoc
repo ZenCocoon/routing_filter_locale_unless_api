@@ -4,7 +4,7 @@
 
 The LocaleUnlessAPI filter is an extension to Sven Fuchs's routing-filter
 
-https://github.com/svenfuchs/routing-filter/tree/rails-3
+https://github.com/svenfuchs/routing-filter
 
 LocaleUnlessAPI filter extracts segments matching /:locale from the beginning of
 the recognized path and exposes the locale parameter as params[:locale]. When a

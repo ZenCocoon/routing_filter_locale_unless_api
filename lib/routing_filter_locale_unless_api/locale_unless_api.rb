@@ -1,6 +1,6 @@
 # The LocaleUnlessAPI filter is an extension to Sven Fuchs's routing-filter
 # 
-# https://github.com/svenfuchs/routing-filter/tree/rails-3
+# https://github.com/svenfuchs/routing-filter
 # 
 # LocaleUnlessAPI filter extracts segments matching /:locale from the beginning of
 # the recognized path and exposes the locale parameter as params[:locale]. When a
@@ -38,7 +38,7 @@ module RoutingFilter
       def api_format?(format)
         format && @@api_formats.include?(format.downcase)
       end
-
+      
       def locales
         @@locales ||= I18n.available_locales.map(&:to_sym)
       end
@@ -61,10 +61,10 @@ module RoutingFilter
 
     def around_generate(*args, &block)
       options = args.extract_options!
-      format  = options[:format]                      # copy format
-      locale  = options.delete(:locale)               # extract the passed :locale option
-      locale  = I18n.locale if locale.nil?            # default to I18n.locale when locale is nil (could also be false)
-      locale  = nil unless valid_locale?(locale)      # reset to no locale when locale is not valid
+      format = options[:format]                      # copy format
+      locale = options.delete(:locale)               # extract the passed :locale option
+      locale = I18n.locale if locale.nil?            # default to I18n.locale when locale is nil (could also be false)
+      locale = nil unless valid_locale?(locale)      # reset to no locale when locale is not valid
 
       yield.tap do |result|
         prepend_locale!(result, locale) if prepend_locale?(result, locale, format)
@@ -81,13 +81,13 @@ module RoutingFilter
       def valid_locale?(locale)
         locale && self.class.locales.include?(locale.to_sym)
       end
-      
-      def root_path?(result)
-        result == '/'
-      end
 
       def default_locale?(locale)
         locale && locale.to_sym == I18n.default_locale.to_sym
+      end
+      
+      def root_path?(result)
+        result == '/'
       end
 
       def prepend_locale?(result, locale, format)
