@@ -53,4 +53,4 @@ You can customize the API formats with
 
 == License
 
-MIT License. Copyright 2011 Sébastien Grosjean, sponsored by HREF:http://www.bookingsync.com:BookingSync Vacation Rental Software:
+MIT License. Copyright 2011 Sébastien Grosjean, sponsored by {BookingSync Vacation Rental Software}[http://www.bookingsync.com]
