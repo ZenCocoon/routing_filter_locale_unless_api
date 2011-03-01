@@ -8,13 +8,13 @@ class LocaleUnlessApiTest < Test::Unit::TestCase
     I18n.default_locale = :en
     I18n.available_locales = %w(fr en)
 
-    RoutingFilter::Locale.api_formats = %w( xml json )
+    RoutingFilter::LocaleUnlessApi.api_formats = %w( xml json )
 
     @root   = { :controller => 'some', :action => 'index' }
     @params = { :controller => 'some', :action => 'show', :id => '1' }
 
     @routes = draw_routes do
-      filter :locale
+      filter :locale_unless_api
       match 'products/:id', :to => 'some#show'
       root :to => 'some#index'
     end
@@ -37,7 +37,7 @@ class LocaleUnlessApiTest < Test::Unit::TestCase
   end
   
   test 'recognizes the path /en' do
-    assert_equal root.merge(:locale => 'en'), routes.recognize_path('/en')
+    assert_equal root.merge(:locale => 'en'), routes.recognize_path('/en/')
   end
   
   test 'recognizes the path /fr' do
@@ -86,7 +86,7 @@ class LocaleUnlessApiTest < Test::Unit::TestCase
   
   test 'does not prepend the segments /:locale to the generated path if the format XLS is considered as api' do
     I18n.locale = 'fr'
-    RoutingFilter::Locale.api_formats = %w( xml json xls )
+    RoutingFilter::LocaleUnlessApi.api_formats = %w( xml json xls )
     assert_equal '/products/1.xls', routes.generate(params.merge(:format => 'xls'))
   end
 
@@ -120,7 +120,7 @@ class LocaleUnlessApiTest < Test::Unit::TestCase
   end
   
   test 'does not prepend the segments /:locale to the generated path if a given locale and the format XLS is considered as api' do
-    RoutingFilter::Locale.api_formats = %w( xml json xls )
+    RoutingFilter::LocaleUnlessApi.api_formats = %w( xml json xls )
     assert_equal '/products/1.xls', routes.generate(params.merge(:format => 'xls', :locale => 'fr'))
   end
 end

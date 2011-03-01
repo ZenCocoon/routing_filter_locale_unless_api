@@ -30,7 +30,7 @@
 require 'i18n'
 
 module RoutingFilter
-  class Locale < Filter
+  class LocaleUnlessApi < Filter
     @@api_formats = %w( xml json )
     cattr_writer :api_formats
 

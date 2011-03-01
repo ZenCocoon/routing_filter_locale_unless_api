@@ -1,5 +1,3 @@
-module RoutingFilter
-  module LocaleUnlessApi
-    VERSION = "0.0.1"
-  end
+module RoutingFilterLocaleUnlessApi
+  VERSION = "0.0.1"
 end
