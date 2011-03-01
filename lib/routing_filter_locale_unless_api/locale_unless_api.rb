@@ -38,7 +38,7 @@ module RoutingFilter
       def api_format?(format)
         format && @@api_formats.include?(format.to_s.downcase)
       end
-      
+
       def locales
         @@locales ||= I18n.available_locales.map(&:to_sym)
       end
@@ -53,30 +53,28 @@ module RoutingFilter
     end
 
     def around_recognize(path, env, &block)
-      locale = extract_locale!(path)                 # remove the locale from the beginning of the path
-      yield.tap do |params|                          # invoke the given block (calls more filters and finally routing)
-        params[:locale] = locale if locale           # set recognized locale to the resulting params hash
+      locale = extract_segment!(self.class.locales_pattern, path) # remove the locale from the beginning of the path
+      yield.tap do |params|                                       # invoke the given block (calls more filters and finally routing)
+        params[:locale] = locale if locale                        # set recognized locale to the resulting params hash
       end
     end
 
     def around_generate(*args, &block)
-      options = args.extract_options!
-      format = options[:format]                      # copy format
-      locale = options.delete(:locale)               # extract the passed :locale option
-      locale = I18n.locale if locale.nil?            # default to I18n.locale when locale is nil (could also be false)
-      locale = nil unless valid_locale?(locale)      # reset to no locale when locale is not valid
+      params = args.extract_options!                              # this is because we might get a call like forum_topics_path(forum, topic, :locale => :en)
+
+      format = params[:format]                                    # save the current format
+      locale = params.delete(:locale)                             # extract the passed :locale option
+      locale = I18n.locale if locale.nil?                         # default to I18n.locale when locale is nil (could also be false)
+      locale = nil unless valid_locale?(locale)                   # reset to no locale when locale is not valid
+
+      args << params
 
       yield.tap do |result|
-        prepend_locale!(result, locale) if prepend_locale?(result, locale, format)
+        prepend_segment!(result, locale) if prepend_locale?(result, locale, format)
       end
     end
 
     protected
-
-      def extract_locale!(path)
-        path.sub!(self.class.locales_pattern, '')
-        $1
-      end
 
       def valid_locale?(locale)
         locale && self.class.locales.include?(locale.to_sym)
@@ -92,13 +90,6 @@ module RoutingFilter
 
       def prepend_locale?(result, locale, format)
         locale && !self.class.api_format?(format) && !(root_path?(result) && default_locale?(locale))
-      end
-
-      def prepend_locale!(result, locale)
-        url = result.is_a?(Array) ? result.first : result
-        url.sub!(%r(^(http.?://[^/]*)?(.*))) {
-          $2 == '/' ? "#{$1}/#{locale}" : "#{$1}/#{locale}#{$2}"
-        }
       end
   end
 end

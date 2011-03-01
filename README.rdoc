@@ -1,7 +1,5 @@
 = Routing Filter : Locale Unless API
 
-= 2 BUGS LEFT do NOT use in production, patches welcome ;-)
-
 The LocaleUnlessAPI filter is an extension to Sven Fuchs's routing-filter
 
 https://github.com/svenfuchs/routing-filter
