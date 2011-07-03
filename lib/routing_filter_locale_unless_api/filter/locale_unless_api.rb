@@ -85,9 +85,9 @@ module RoutingFilterLocaleUnlessAPI
 
         # Returns true if the locale is valid.
         #
-        # @params [Symbol,String] locale
+        # @param [Symbol,String] locale
         #
-        # @returns [Boolean]
+        # @return [Boolean]
         def valid_locale?(locale)
           locale && self.class.locales.include?(locale.to_sym)
         end
