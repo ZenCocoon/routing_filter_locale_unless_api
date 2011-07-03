@@ -4,7 +4,7 @@
 
 * Enhancements
   * Isolate the LocaleUnlessApi filter under it's own namespace
-  * Add [Appraisal](https://github.com/thoughtbot/appraisal) support to test with all actionpack supported version.
+  * Add [Appraisal](https://github.com/thoughtbot/appraisal) support to test with all ActionPack supported version.
   * Move tests to RSpec.
 
 ### 0.0.1 / 2011-03-01

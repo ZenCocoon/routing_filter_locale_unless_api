@@ -1,12 +1,12 @@
 require 'bundler/setup'
 require 'rake'
 require 'rspec/core/rake_task'
-require 'cucumber/rake/task'
+# require 'cucumber/rake/task'
 require 'appraisal'
 
-desc "Default: Run all specs and cucumber features under all supported Rails versions."
+desc "Default: Run all specs under all ActionPack supported versions."
 task :default => ["appraisal:install"] do
-  exec('rake appraisal spec cucumber')
+  exec('rake appraisal spec')
 end
 
 desc "Run all specs"
@@ -14,4 +14,4 @@ RSpec::Core::RakeTask.new(:spec) do |t|
   t.rspec_opts = %w[--color]
 end
 
-Cucumber::Rake::Task.new(:cucumber)
+# Cucumber::Rake::Task.new(:cucumber)
