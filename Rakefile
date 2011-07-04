@@ -15,3 +15,17 @@ RSpec::Core::RakeTask.new(:spec) do |t|
 end
 
 # Cucumber::Rake::Task.new(:cucumber)
+
+task :clobber do
+  rm_rf 'pkg'
+  rm_rf 'tmp'
+  rm_rf 'coverage'
+  rm 'coverage.data'
+end
+
+namespace :clobber do
+  desc "remove generated rbc files"
+  task :rbc do
+    Dir['**/*.rbc'].each {|f| File.delete(f)}
+  end
+end
