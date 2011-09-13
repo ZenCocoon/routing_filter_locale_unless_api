@@ -58,45 +58,45 @@ module RoutingFilterLocaleUnlessAPI::Filter
 
         context "prepends the segments /:locale to the generated path" do
           it 'if the current locale is not the default locale' do
-            routes.generate(params).should == '/fr/products/1'
+            generated_routes_with(params).should == '/fr/products/1'
           end
 
           it 'if the current locale is the default locale' do
             I18n.locale = 'en'
-            routes.generate(params).should == '/en/products/1'
+            generated_routes_with(params).should == '/en/products/1'
           end
 
           it 'if the current locale is not the default locale and with root url' do
-            routes.generate(root).should == '/fr'
+            generated_routes_with(root).should == '/fr'
           end
 
           it 'if the format XLS is not considered as api' do
-            routes.generate(params.merge(:format => 'xls')).should == '/fr/products/1.xls'
+            generated_routes_with(params.merge(:format => 'xls')).should == '/fr/products/1.xls'
           end
         end
 
         context "does not prepend the segments /:locale to the generated path" do
           it 'if the current locale is the default locale and with root url' do
             I18n.locale = 'en'
-            routes.generate(root).should == '/'
+            generated_routes_with(root).should == '/'
           end
 
           it 'if the format XML is considered as api' do
-            routes.generate(params.merge(:format => 'xml')).should == '/products/1.xml'
+            generated_routes_with(params.merge(:format => 'xml')).should == '/products/1.xml'
           end
 
           it 'if the format JSON is considered as api' do
-            routes.generate(params.merge(:format => 'json')).should == '/products/1.json'
+            generated_routes_with(params.merge(:format => 'json')).should == '/products/1.json'
           end
 
           it 'if the format XLS is considered as api' do
             RoutingFilter::LocaleUnlessApi.api_formats = %w( xml json xls )
-            routes.generate(params.merge(:format => 'xls')).should == '/products/1.xls'
+            generated_routes_with(params.merge(:format => 'xls')).should == '/products/1.xls'
           end
         end
 
         it 'should work with format as symbol' do
-          routes.generate(params.merge(:format => :xml)).should == '/products/1.xml'
+          generated_routes_with(params.merge(:format => :xml)).should == '/products/1.xml'
         end
       end
 
@@ -105,41 +105,48 @@ module RoutingFilterLocaleUnlessAPI::Filter
 
         context "prepends the segments /:locale to the generated path" do
           it 'if the given locale is not the default locale' do
-            routes.generate(params).should == '/fr/products/1'
+            generated_routes_with(params).should == '/fr/products/1'
           end
 
           it 'if the given locale is the default locale' do
-            routes.generate(params.merge(:locale => 'en')).should == '/en/products/1'
+            generated_routes_with(params.merge(:locale => 'en')).should == '/en/products/1'
           end
 
           it 'if the given locale is not the default locale and with root url' do
-            routes.generate(root.merge(:locale => 'fr')).should == '/fr'
+            generated_routes_with(root.merge(:locale => 'fr')).should == '/fr'
           end
 
           it 'if a given locale and the format XLS is not considered as api' do
-            routes.generate(params.merge(:format => 'xls')).should == '/fr/products/1.xls'
+            generated_routes_with(params.merge(:format => 'xls')).should == '/fr/products/1.xls'
           end
         end
 
         context "does not prepend the segments /:locale to the generated path" do
           it 'if a given locale is the default locale and with the root url' do
-            routes.generate(root.merge(:locale => 'en')).should == '/'
+            generated_routes_with(root.merge(:locale => 'en')).should == '/'
           end
 
           it 'if a given locale and the format XML is considered as api' do
-            routes.generate(params.merge(:format => 'xml')).should == '/products/1.xml'
+            generated_routes_with(params.merge(:format => 'xml')).should == '/products/1.xml'
           end
 
           it 'if a given locale and the format JSON is considered as api' do
-            routes.generate(params.merge(:format => 'json')).should == '/products/1.json'
+            generated_routes_with(params.merge(:format => 'json')).should == '/products/1.json'
           end
 
           it 'if a given locale and the format XLS is considered as api' do
             RoutingFilter::LocaleUnlessApi.api_formats = %w( xml json xls )
-            routes.generate(params.merge(:format => 'xls')).should == '/products/1.xls'
+            generated_routes_with(params.merge(:format => 'xls')).should == '/products/1.xls'
           end
         end
       end
     end
+
+    private
+
+      def generated_routes_with(params)
+        url = routes.generate(params)
+        url.is_a?(Array) ? url.first : url
+      end
   end
 end

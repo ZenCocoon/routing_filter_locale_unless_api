@@ -26,7 +26,7 @@ tracker](https://github.com/ZenCocoon/routing_filter_locale_unless_api/issues).
 
 ## Requirements
 
-    actionpack ~> 3.0.9
+    actionpack >= 3.0.9
     i18n >= 0.5.0
     routing-filter ~> 0.2.3
 

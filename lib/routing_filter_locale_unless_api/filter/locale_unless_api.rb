@@ -71,8 +71,8 @@ module RoutingFilterLocaleUnlessAPI
 
         format = params[:format]                                    # save the current format
         locale = params.delete(:locale)                             # extract the passed :locale option
-        locale = I18n.locale if locale.nil?                         # default to I18n.locale when locale is nil (could also be false)
         locale = nil unless valid_locale?(locale)                   # reset to no locale when locale is not valid
+        locale = I18n.locale if locale.nil?                         # default to I18n.locale when locale is nil (could also be false)
 
         args << params
 
@@ -107,7 +107,7 @@ module RoutingFilterLocaleUnlessAPI
         #
         # @return [Boolean]
         def root_path?(path)
-          path == '/'
+          (path.is_a?(Array) ? path.first : path) == '/'
         end
 
         # Returns true if it should prepend the locale
