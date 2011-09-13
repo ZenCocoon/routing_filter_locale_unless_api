@@ -4,3 +4,7 @@ rvm:
   - 1.9.2
   - ruby-head
   - ree
+gemfile:
+  - gemfiles/Gemfile.actionpack-3.0.x
+  - gemfiles/Gemfile.actionpack-3.1.x
+script: "bundle exec rake spec"
