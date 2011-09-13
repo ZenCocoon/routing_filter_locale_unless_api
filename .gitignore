@@ -9,7 +9,8 @@ Gemfile.lock
 bin
 coverage*
 doc
-gemfiles
+gemfiles/*.gemfile
+gemfiles/*.gemfile.lock
 pkg
 rdoc
 rerun.txt
