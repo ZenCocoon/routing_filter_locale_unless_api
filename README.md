@@ -16,7 +16,7 @@ It will not add the locale parameter as a url fragment if:
 
 ## Documentation
 
-The [RDoc](http://rubydoc.info/gems/routing_filter_locale_unless_api/0.1.0/frames) provides
+The [RDoc](http://rubydoc.info/gems/routing_filter_locale_unless_api/0.2.0/frames) provides
 additional information for contributors and/or extenders.
 
 All of the documentation is open source and a work in progress. If you find it
@@ -25,6 +25,8 @@ patches to the [routing_filter_locale_unless_api issue
 tracker](https://github.com/ZenCocoon/routing_filter_locale_unless_api/issues).
 
 ## Requirements
+
+Notice: Tests currently failing under Ruby 1.8.7-p352, Ruby 1.8.7-p334 works properly so as Ruby 1.9.1, 1.9.2
 
     actionpack >= 3.0.9
     i18n >= 0.5.0

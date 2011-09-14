@@ -1,6 +1,13 @@
 ### Dev
 
-[full changelog](https://github.com/ZenCocoon/routing_filter_locale_unless_api/compare/v0.1.0...master)
+[full changelog](https://github.com/ZenCocoon/routing_filter_locale_unless_api/compare/v0.2.0...master)
+
+### 0.2.0 / 2011-09-13
+
+[full changelog](https://github.com/ZenCocoon/routing_filter_locale_unless_api/compare/v0.1.0...v0.2.0)
+
+* Enhancements
+  * Add support for actionpack 3.1.*
 
 ### 0.1.0 / 2011-07-04
 
