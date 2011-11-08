@@ -9,7 +9,6 @@ Gemfile.lock
 bin
 coverage*
 doc
-gemfiles/*.gemfile
 gemfiles/*.gemfile.lock
 pkg
 rdoc
