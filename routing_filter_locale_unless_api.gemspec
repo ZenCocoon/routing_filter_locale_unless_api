@@ -20,7 +20,7 @@ Gem::Specification.new do |s|
 
   s.add_dependency "actionpack", ">= 3.0.9"
   s.add_dependency "i18n", ">= 0.5.0"
-  s.add_dependency "routing-filter", "~> 0.2.3"
+  s.add_dependency "routing-filter", ">= 0.2.3"
 
   s.add_development_dependency "rake", "~> 0.9"
   s.add_development_dependency 'rspec', '~> 2.6.0'
