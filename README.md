@@ -26,11 +26,11 @@ tracker](https://github.com/ZenCocoon/routing_filter_locale_unless_api/issues).
 
 ## Requirements
 
-Notice: Tests currently failing under Ruby 1.8.7-p352. Ruby 1.8.7-p334 works properly so as Ruby 1.9.1, 1.9.2, 1.9.3
+Tested with Ruby 1.8.7, 1.9.2, 1.9.3, Ruby-head, REE and JRuby
 
     actionpack >= 3.0.9
     i18n >= 0.5.0
-    routing-filter ~> 0.2.3
+    routing-filter >= 0.2.3
 
 ## Installation
 
