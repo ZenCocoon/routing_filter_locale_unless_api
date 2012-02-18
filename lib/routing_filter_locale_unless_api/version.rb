@@ -1,6 +1,6 @@
 module RoutingFilterLocaleUnlessAPI
   # @private
   module Version
-    STRING = "0.2.0"
+    STRING = "0.2.1"
   end
 end
