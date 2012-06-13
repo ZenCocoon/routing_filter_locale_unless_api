@@ -6,6 +6,9 @@
 
 [full changelog](https://github.com/ZenCocoon/routing_filter_locale_unless_api/compare/v0.2.1...v0.2.2)
 
+* Fix
+  * Fix Gem dependencies.
+
 ### 0.2.1 / 2012-02-18
 
 [full changelog](https://github.com/ZenCocoon/routing_filter_locale_unless_api/compare/v0.2.0...v0.2.1)
