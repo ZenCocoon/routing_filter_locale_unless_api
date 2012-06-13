@@ -1,6 +1,10 @@
 ### Dev
 
-[full changelog](https://github.com/ZenCocoon/routing_filter_locale_unless_api/compare/v0.2.1...master)
+[full changelog](https://github.com/ZenCocoon/routing_filter_locale_unless_api/compare/v0.2.2...master)
+
+### 0.2.2 / 2012-06-13
+
+[full changelog](https://github.com/ZenCocoon/routing_filter_locale_unless_api/compare/v0.2.1...v0.2.2)
 
 ### 0.2.1 / 2012-02-18
 
