@@ -1,5 +1,45 @@
 # Routing Filter, Locale Unless API [![build status](http://travis-ci.org/ZenCocoon/routing_filter_locale_unless_api.png)](http://travis-ci.org/ZenCocoon/routing_filter_locale_unless_api)
 
+## Deprecated with Rails 4+
+
+Since Rails 4+, the router changed and there's more flexible way to do this:
+
+In your `congfig/routes.rb`:
+
+* put all in the locale scope (except the root)
+* add route for locale's only path
+
+```ruby
+scope "(:locale)", locale: /([a-zA-Z]{2}[-_])?[a-zA-Z]{2}/ do
+end
+
+get '/en', to: redirect('/')
+get '/:locale' => 'home#index', locale: /([a-zA-Z]{2}[-_])?[a-zA-Z]{2}/
+root to: 'home#index'
+```
+
+In your `app/application_controller.rb`
+
+* Set the locale from the params
+* Add the locale as default URL option
+
+```ruby
+before_filter :set_locale
+
+def default_url_options(options={})
+  formats = %w( xml json )
+  { locale: formats.include?(params[:format].to_s) ? nil : I18n.locale }
+end
+
+private
+
+def set_locale
+  I18n.locale = params[:locale] || I18n.default_locale
+end
+```
+
+## For Rails 3.2 and under
+
 RoutingFilterLocaleUnlessAPI is a extension filter to Sven Fuchs’s routing-filter
 
 http://github.com/svenfuchs/routing-filter
