@@ -73,6 +73,13 @@ module RoutingFilterLocaleUnlessAPI::Filter
           it 'if the format XLS is not considered as api' do
             generated_routes_with(params.merge(:format => 'xls')).should == '/fr/products/1.xls'
           end
+
+          context "when exclude is set" do
+            it "if a given path doesn't match exclude regexp" do
+              RoutingFilter::LocaleUnlessApi.exclude = %r(/clients)
+              generated_routes_with(params.merge(:format => 'xls')).should == '/fr/products/1.xls'
+            end
+          end
         end
 
         context "does not prepend the segments /:locale to the generated path" do
@@ -137,6 +144,11 @@ module RoutingFilterLocaleUnlessAPI::Filter
           it 'if a given locale and the format XLS is considered as api' do
             RoutingFilter::LocaleUnlessApi.api_formats = %w( xml json xls )
             generated_routes_with(params.merge(:format => 'xls')).should == '/products/1.xls'
+          end
+
+          it 'if a given path matches exclude regexp' do
+            RoutingFilter::LocaleUnlessApi.exclude = %r(/products)
+            generated_routes_with(params).should == '/products/1'
           end
         end
       end

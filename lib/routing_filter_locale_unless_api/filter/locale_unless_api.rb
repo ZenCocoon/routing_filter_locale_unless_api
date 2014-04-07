@@ -4,7 +4,7 @@ module RoutingFilterLocaleUnlessAPI
   module Filter
     class LocaleUnlessApi < RoutingFilter::Filter
       @@api_formats = %w( xml json )
-      cattr_writer :api_formats
+      cattr_writer :api_formats, :exclude
 
       # Class Methods
       class << self
@@ -118,9 +118,22 @@ module RoutingFilterLocaleUnlessAPI
         #
         # @return [Boolean]
         def prepend_locale?(path, locale, format)
-          locale && !self.class.api_format?(format) && !(root_path?(path) && default_locale?(locale))
+          locale && !self.class.api_format?(format) && !(root_path?(path) && default_locale?(locale)) && !excluded?(path)
         end
 
+        # Returns true if path should be excluded based on :exclude option
+        #
+        # @param [String|Array] path
+        # @return [Boolean]
+        def excluded?(path)
+          path = path.is_a?(Array) ? path.first : path
+          case @@exclude
+          when Regexp
+            path =~ @@exclude
+          when Proc
+            @@exclude.call(path)
+          end
+        end
     end
   end
 end
